@@ -10,7 +10,7 @@ authorizedVehicleNotFound = " is not an authorized vehicle, if you received this
 inputErrorMessage = "\nInvalid input.\n"
 exitMessage = "\nThank you for using the AutoCountry Vehicle Finder, good-bye! Press Ctrl+C to end program.\n"
 mainMenu = """********************************
-AutoCountry Vehicle Finder v0.1
+AutoCountry Vehicle Finder v0.2
 ********************************
 Please Enter the following number below from the following menu:
 
