@@ -1,5 +1,7 @@
 import sys
 
+from data.config import REMOVE
+
 sys.path.append('data')
 
 from config import (
@@ -12,12 +14,15 @@ from config import (
   MAINMENU,
   NOTAUTHORIZED,
   openDB,
+  REMOVE,
+  searchDB,
 )
 
 carIndexVal = 0
 menuOption = 0
 newCar = ""
 searchFor = ""
+yesOrNo = ""
 
 while True:
   print(MAINMENU)
@@ -32,13 +37,11 @@ while True:
       print("\n" + carDB.read())
     
   elif menuOption == 2:
-    with open(openDB(), 'r') as carDB:
-      carIndexVal = [line.strip() for line in carDB]
-      searchFor = input(ENTERCAR).strip()
-      if searchFor in carIndexVal:
-        print("\n" + f"{searchFor}{ISAUTHORIZED}")
-      else:
-        print("\n" + f"{searchFor}{NOTAUTHORIZED}")
+    searchFor = input(ENTERCAR).strip()
+    if searchDB(searchFor):
+      print("\n" + f"{searchFor}{ISAUTHORIZED}")
+    else:
+      print("\n" + f"{searchFor}{NOTAUTHORIZED}")
       
   elif menuOption == 3:
     newCar = input(ADDCAR)
@@ -47,6 +50,28 @@ while True:
     print(f"\nYou have added '{newCar}' as an authorized vehicle")
 
   elif menuOption == 4:
+    searchFor = input(REMOVE)
+    if searchDB(searchFor):
+      with open(openDB(), 'r') as carDB:
+        carIndexVal = [line.strip() for line in carDB]
+      yesOrNo = input(
+        '\nAre you sure you want to remove "' + searchFor +
+        '" from the authorized vehicles list? '
+        )
+      if yesOrNo == "yes":
+        carIndexVal.remove(searchFor)
+        print(f'\nYou have REMOVED "{searchFor}" as an authorized vehicle')
+        with open(openDB(), 'w') as carDB:
+          for vehicle in carIndexVal:
+            carDB.write(vehicle + '\n')
+      elif yesOrNo == "no":
+        print("\nAction cancelled.")
+      else:
+        print("\nInvalid input. Returning to main menu...")
+    else:
+      print("\nVehicle not found. Returning to Main Menu")
+
+  elif menuOption == 5:
    print(GOODBYE)
    try:
     while True:

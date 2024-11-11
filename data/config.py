@@ -1,6 +1,11 @@
 def openDB():
   return ('data/car_db.txt')
 
+def searchDB(searchFor):
+  with open('data/car_db.txt', 'r') as carDB:
+    carIndexVal = [line.strip() for line in carDB]
+    return searchFor in carIndexVal
+
 ADDCAR = (
 "\nPlease Enter the full Vehicle name you would like to add: "
 )
@@ -9,6 +14,8 @@ AUTHCARS = (
 "\nThe AutoCountry sales manager has authorized the purchase \
 and selling of the following vehicles:\n"
 )
+
+CHOOSEOPTION = "\nPlease enter a number to select an option: "
 
 ENTERCAR = "\nPlease enter the full vehicle name: "
 
@@ -23,14 +30,17 @@ ISAUTHORIZED = " is an authorized vehicle"
 
 MAINMENU = """
 ********************************
-AutoCountry Vehicle Finder v0.3
+AutoCountry Vehicle Finder v0.4
 ********************************
 Please Enter the following number below from the following menu:
 
 1. PRINT all Authorized Vehicles
 2. SEARCH for Authorized Vehicle
 3. ADD Authorized Vehicle
-4. Exit
+4. DELETE Authorized Vehicle
+5. Exit
+
+********************************
 """
 
 NOTAUTHORIZED = (
@@ -38,4 +48,4 @@ NOTAUTHORIZED = (
 please check the spelling and try again"
 )
 
-CHOOSEOPTION = "Please enter a number to select an option: "
+REMOVE = "\nPlease Enter the full Vehicle name you would like to REMOVE: "
