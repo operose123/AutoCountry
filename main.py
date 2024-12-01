@@ -50,16 +50,16 @@ while True:
     print(f"\nYou have added '{newCar}' as an authorized vehicle")
 
   elif menuOption == 4:
-    searchFor = input(REMOVE)
+    searchFor = input(REMOVE).strip().lower()
     if searchDB(searchFor):
       with open(openDB(), 'r') as carDB:
         carIndexVal = [line.strip() for line in carDB]
       yesOrNo = input(
         '\nAre you sure you want to remove "' + searchFor +
         '" from the authorized vehicles list? '
-        )
+        ).strip().lower()
       if yesOrNo == "yes":
-        carIndexVal.remove(searchFor)
+        carIndexVal.remove(next(vehicle for vehicle in carIndexVal if vehicle.lower() == searchFor))
         print(f'\nYou have REMOVED "{searchFor}" as an authorized vehicle')
         with open(openDB(), 'w') as carDB:
           for vehicle in carIndexVal:
@@ -73,11 +73,7 @@ while True:
 
   elif menuOption == 5:
    print(GOODBYE)
-   try:
-    while True:
-      pass
-   except KeyboardInterrupt:
-    break
+   break
   
   else:
     print(INVALIDINPUT)

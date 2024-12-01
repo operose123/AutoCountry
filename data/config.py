@@ -3,8 +3,8 @@ def openDB():
 
 def searchDB(searchFor):
   with open('data/car_db.txt', 'r') as carDB:
-    carIndexVal = [line.strip() for line in carDB]
-    return searchFor in carIndexVal
+    carIndexVal = [line.strip().lower() for line in carDB]
+    return searchFor.lower() in carIndexVal
 
 ADDCAR = (
 "\nPlease Enter the full Vehicle name you would like to add: "
@@ -21,7 +21,7 @@ ENTERCAR = "\nPlease enter the full vehicle name: "
 
 GOODBYE = (
 "\nThank you for using the AutoCountry Vehicle Finder, \
-good-bye! Press Ctrl+C to end program.\n"
+good-bye!\n"
 )
 
 INVALIDINPUT = "\nInvalid input.\n"
@@ -30,7 +30,7 @@ ISAUTHORIZED = " is an authorized vehicle"
 
 MAINMENU = """
 ********************************
-AutoCountry Vehicle Finder v0.4
+AutoCountry Vehicle Finder v0.5
 ********************************
 Please Enter the following number below from the following menu:
 
